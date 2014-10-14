@@ -49,7 +49,7 @@ function snakeInitialize () {
     snakeSize = 20;
     
     for(var index = 0; index >= 0; index++) { /*specifies that this variable function is true as long as the index is greater than or equal to zero*/
-    snake.push({ x: index, y: 1 });                                                                                   
+    snake.push({ x: index, y: 0 });                                                                                   
     }
 }
 
