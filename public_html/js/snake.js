@@ -1,6 +1,7 @@
 var snake;
 var snakeLength;
 var snakeSize;
+var snakeDirection;
 
 var food;
 
@@ -12,7 +13,7 @@ gameInitialize();
 snakeInitialize();
 foodInitialize();
 setInterval(gameLoop, 1000/30); /*this code calls a useable function in the code to make it useable*/
-
+setFoodPosition();
 
 
 function gameInitialize() { /*specifies the way the game is supposed to work*/
@@ -26,6 +27,8 @@ function gameInitialize() { /*specifies the way the game is supposed to work*/
     canvas.width = screenWidth;
     canvas.height = screenHeight;
     /*this makes the entire screen the game screen*/
+    
+    document.addEventListener("kewdown", keyboardHandler);
 }
 
 
@@ -39,23 +42,23 @@ function gameLoop() { /*Allows the game to loop. Makes the game endless basicall
 function gameDraw() { /*allows me to specifiy background clolor and other game styling drawings*/
     context.fillStyle = "rgb(104, 19, 209)"; /*fillStyle allows me to change the background color of my canvaas.*/
     context.fillRect (0, 0, screenWidth, screenHeight);
-    
-    
+       
 }
 
 function snakeInitialize () {
     snake = [];
     snakeLength = 12;
     snakeSize = 20;
+    snakeDirection = "down";
     
-    for(var index = 0; index >= 0; index++) { /*specifies that this variable function is true as long as the index is greater than or equal to zero*/
+    for(var index = snakeLength - 1; index >= 0; index--) { /*specifies that this variable function is true as long as the index is greater than or equal to zero*/
     snake.push({ x: index, y: 0 });                                                                                   
     }
 }
 
 function snakeDraw () {
-    for (var index = snakeLength; index < snake.length; index++) {
-        context.fillStyle = "white";
+    for (var index = 0; index < snake.length; index++) {
+        context.fillStyle = "red";
         context.fillRect(snake[index].x * snakeSize, snake[index].y * snakeSize, snakeSize, snakeSize);
        
     }
@@ -66,7 +69,13 @@ function snakeUpdate() {
     var snakeHeadX = snake[0].x;
     var snakeHeadY = snake[0].y;
     
-    snakeHead++;
+    if(snakeDirection == "down") {
+        snakeHeadY++;
+    }
+    
+    else {
+        snakeHeadX++;
+    }
     
     var snakeTail = snake.pop();
     snakeTail.x = snakeHeadX;
@@ -79,7 +88,7 @@ function foodInitialize() {
         x: 0,
         y: 0
      };
-    
+   // setFoodPosition();
 }
 
 function foodDraw() {
@@ -87,3 +96,18 @@ function foodDraw() {
   context.fillRect(food.x, food.y, snakeSize, snakeSize);
 }
 /*this function draws the snake's food on the screen*/
+
+
+function setFoodPosition() {
+    var randomX = Math.floor(Math.random() * screenWidth);
+    var randomY = Math.floor(Math.random() * screenHeight);
+    
+    food.x = randomX;
+    food.y = randomY;
+    
+}
+
+function keyboardHandler(event) {
+    console.log(event);
+    
+}
