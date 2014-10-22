@@ -12,7 +12,7 @@ var screenHeight;
 gameInitialize();
 snakeInitialize();
 foodInitialize();
-setInterval(gameLoop, 1000/30); /*this code calls a useable function in the code to make it useable*/
+setInterval(gameLoop, 1000/30); /*this code calls a usable function in the code to make it functional*/
 setFoodPosition();
 
 
@@ -88,7 +88,7 @@ function foodInitialize() {
         x: 0,
         y: 0
      };
-   // setFoodPosition();
+   setFoodPosition();
 }
 
 function foodDraw() {
@@ -103,11 +103,22 @@ function setFoodPosition() {
     var randomY = Math.floor(Math.random() * screenHeight);
     
     food.x = randomX;
-    food.y = randomY;
+    food.y = randomY; /*sets the Snake's food to spawn at a random place on the canvas*/
     
 }
 
+/* -------------------------------------------------------------------------
+ * Input Functions
+ * -------------------------------------------------------------------------
+ */
+
 function keyboardHandler(event) {
     console.log(event);
+    
+    if(event.keyCode == "68") {
+        snakeDirection = "right";
+        
+    
+    }
     
 }
