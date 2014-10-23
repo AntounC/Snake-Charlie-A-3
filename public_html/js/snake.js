@@ -28,7 +28,7 @@ function gameInitialize() { /*specifies the way the game is supposed to work*/
     canvas.height = screenHeight;
     /*this makes the entire screen the game screen*/
     
-    document.addEventListener("kewdown", keyboardHandler);
+    document.addEventListener("keydown", keyboardHandler);
 }
 
 
@@ -73,7 +73,7 @@ function snakeUpdate() {
         snakeHeadY++;
     }
     
-    else {
+    else if(snakeDirection == "right") {
         snakeHeadX++;
     }
     
@@ -93,7 +93,7 @@ function foodInitialize() {
 
 function foodDraw() {
   context.fillStyle = "white";
-  context.fillRect(food.x, food.y, snakeSize, snakeSize);
+  context.fillRect(food.x*snakeSize, food.y*snakeSize, snakeSize, snakeSize);
 }
 /*this function draws the snake's food on the screen*/
 
@@ -102,8 +102,8 @@ function setFoodPosition() {
     var randomX = Math.floor(Math.random() * screenWidth);
     var randomY = Math.floor(Math.random() * screenHeight);
     
-    food.x = randomX;
-    food.y = randomY; /*sets the Snake's food to spawn at a random place on the canvas*/
+    food.x = Math.floor(randomX / snakeSize);
+    food.y = Math.floor(randomY / snakeSize); /*sets the Snake's food to spawn at a random place on the canvas*/
     
 }
 
@@ -115,10 +115,10 @@ function setFoodPosition() {
 function keyboardHandler(event) {
     console.log(event);
     
-    if(event.keyCode == "68") {
+    if(event.keyCode == "68" && snakeDirection != "left") {
         snakeDirection = "right";
-        
-    
     }
-    
+    else if(event.keyCode == "83" && snakeDirection !="up") {
+        snakeDirection = "down";
+    }
 }
