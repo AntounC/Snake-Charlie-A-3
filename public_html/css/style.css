@@ -3,7 +3,7 @@
 body {
     margin: 0;
     padding: 0;
-}
+} 
 
 #game-screen {
     display: block;
@@ -14,15 +14,16 @@ body {
     visibility: hidden;
 }
 
-h1, h3 {
+h1, h3 { //*Edits color and position of text*//
     color: white;
     text-align: center;
     
 }
 
 .title {
-    font-size: 62px;
+    font-size: 100px;
     margin-bottom: 0px;
+    margin-top: 0px;
 }
 
 #restartButton {

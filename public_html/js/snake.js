@@ -11,6 +11,7 @@ var screenHeight;
 
 var gameState;
 var gameOverMenu;
+var reestartButton;
 
 gameInitialize();
 snakeInitialize();
@@ -35,7 +36,9 @@ function gameInitialize() { /*specifies the way the game is supposed to work*/
 
     gameOverMenu = document.getElementById("gameOver");
     centerMenuPosition(gameOverMenu);
-
+    
+    restartButton = document.getElementById("restartButton");
+    restartButton.addEventListener("click", gameRestart);
     setState("PLAY");
 }
 
@@ -54,6 +57,18 @@ function gameDraw() { /*allows me to specifiy background clolor and other game s
     context.fillRect(0, 0, screenWidth, screenHeight);
 
 }
+
+function gameRestart() {
+    snakeInitialize();
+    foodInitialize();
+    hideMenu(gameOverMenu);
+    setState("PLAY");
+}
+
+/*------------------------------------------------------------------------------
+ * Snake Functions
+ * -----------------------------------------------------------------------------
+ */
 
 function snakeInitialize() {
     snake = [];
@@ -183,7 +198,7 @@ function checkWallCollisions(snakeHeadX, snakeHeadY) {
 
 function setState(state) {
     gameState = state;
-
+    showMenu(state);
 }
 
 /*------------------------------------------------------------------------------
@@ -193,7 +208,10 @@ function setState(state) {
 
 function displayMenu(menu) {
     menu.style.visibility = "visible";
-    showMenu(state);
+}
+
+function hideMenu(menu) {
+    menu.style.visibility = "hidden";
 }
 
 function showMenu(state) {
@@ -203,5 +221,6 @@ function showMenu(state) {
 }
 
 function centerMenuPosition(menu) {
-    menu.style.top = (screenHeight / 2) + "px";
+    menu.style.top = (screenHeight / 2) - (menu.offsetHeight / 2) + "px";
+    menu.style.left = (screenWidth / 2) - (menu.offesetWidth / 2) + "px";
 }
